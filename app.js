@@ -1,67 +1,60 @@
-const input = document.querySelector('#password');
-const bars = document.querySelectorAll('.bar');
+// Taking variables
+const userDisplay = document.querySelector('#player-choice');
+const pcDisplay = document.querySelector('#computer-choice');
+const waiting = document.querySelector('#vs-text');
+const icons = document.querySelectorAll('.select');
+const result = document.querySelector('.result-text');
 
-input.addEventListener('input' , () => {
+// Audio file creation
+const win = new Audio('sounds/win.wav');
+const lose = new Audio('sounds/lose.wav');
 
-    // input value
-    let inputValue = input.value;
+// Rules
+const rules = {
+    rock : 'scissors',
+    paper : 'rock',
+    scissors : 'paper'
+}
 
-    // length validation
-    if (inputValue.length > 12) {
-        alert('Your password must be in 12 characters');
-        input.value = inputValue.slice(0, 12);
-        inputValue = input.value;
-        return;
-    }
+// Image links
+const imageLinks = {
+    rock : 'images/hand.png',
+    paper : 'images/hand-paper.png',
+    scissors : 'images/two.png'
+}
 
-    // remove bars active classes
-    bars.forEach(bar => bar.classList.remove('weak' , 'medium' , 'strong'));
+// Main function
+icons.forEach(icon => {
+    icon.addEventListener('click' , (e) => {
+        
+        // user input data
+        let userInput = e.target.dataset.choice;
+        let userInputSource = imageLinks[userInput];
+        userDisplay.src = userInputSource;
 
-    // set custom condition and index
+        // computer data
+        let randomSource = Math.floor(Math.random() * 3);
+        let values = Object.keys(imageLinks);
+        let computerOutput = values[randomSource];
+        pcDisplay.src = imageLinks[computerOutput];
 
-      // Regex Pattern
-      const meduimPattern = /^(?=.*[a-zA-Z])(?=.*\d).+$/;
-      const hardPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[?!@#$&]).+$/    
-
-      // set logic
-      let customIndex = 0;
-
-      if (inputValue.length > 0) {customIndex = 1};
-      if (inputValue.length > 5 && meduimPattern.test(inputValue)) {customIndex = 2};
-      if (inputValue.length > 7 && hardPattern.test(inputValue)) {customIndex = 3};
-
-    // activation divs/bars
-    bars.forEach((bar , index) => {
-
-        // check bars index < customIndex
-        if (index < customIndex) {
-
-            // check customIndex to bars index number
-            if (customIndex === 1) {
-                bar.classList.add('weak');
-            }
-            else if (customIndex === 2) {
-                bar.classList.add('medium');
-            }
-            else if (customIndex === 3) {
-                bar.classList.add('strong');
-            }
+        // core logic
+        if (computerOutput === userInput) {
+            waiting.textContent = '🤝 Game Tied';
+            result.textContent = 'Try Again';
+            result.style.color = '#ffc107';
+        }
+        else if (rules[userInput] === computerOutput) {
+            waiting.textContent = '✔️ Correct';
+            result.textContent = 'Congratulations';
+            result.style.color = '#008622';
+            win.play();
+        }
+        else {
+            waiting.textContent = '❌ Wrong';
+            result.textContent = 'Try Again';
+            result.style.color = '#f00';
+            lose.play();
         }
     })
-});
-
-
-// Show/Hide Button
-const btn = document.querySelector('#togglePassword');
-
-// functionality
-btn.addEventListener('click' , () => {
-
-    // exchanging button classes
-    btn.classList.toggle('fa-eye');
-    btn.classList.toggle('fa-eye-slash');
-
-    // show/hide
-    let type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-    input.setAttribute('type' , type);
 })
