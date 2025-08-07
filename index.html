@@ -2,43 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rock Paper Scissors</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stopwatch</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Beginner game</h1>
-    <div class="battle-section">
-      <div class="player-image">
-        <h2>User</h2>
-        <img src="images/like.png" draggable="false" alt="Player Choice" id="player-choice" />
-      </div>
-      <div class="vs-text" id="vs-text">Choose One</div>
-      <div class="computer-image">
-        <h2>Computer</h2>
-        <img src="images/like.png" draggable="false" alt="Computer Choice" id="computer-choice" />
-      </div>
+    <div class="container">
+        <h1 class="title">Stopwatch</h1>
+        <div class="timer" id="display">00:00:00</div>
+        <div class="controls">
+            <button id="start">Start</button>
+            <button id="pause">Pause</button>
+            <button id="reset">Reset</button>
+        </div>
     </div>
-
-    <div class="selection-section">
-      <div>
-        <img src="images/hand.png" draggable="false" alt="rock" class="select" data-choice="rock" />
-        <p>Rock</p>
-      </div>
-      <div>
-        <img src="images/hand-paper.png" draggable="false" alt="Paper" class="select" data-choice="paper" />
-        <p>Paper</p>
-      </div>
-      <div>
-        <img src="images/two.png" draggable="false" alt="Scissors" class="select" data-choice="scissors" />
-        <p>Scissor</p>
-      </div>
-    </div>
-
-    <div class="result-text" id="result-text">Make your move!</div>
-  </div>
-  <!--JavaScript-->
-  <script src="app.js"></script>
+    <!--JavaScript-->
+    <script src="app.js"></script>
 </body>
 </html>
