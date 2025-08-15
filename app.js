@@ -1,85 +1,38 @@
-// Take html tags into variables
-const startBtn = document.querySelector('#start');
-const pauseBtn = document.querySelector('#pause');
-const resetBtn = document.querySelector('#reset');
-const display = document.querySelector('#display');
+const items = document.querySelectorAll('.item');
+const slider = document.querySelector('.slider');
+const next = document.querySelector('#next');
+const prev = document.querySelector('#prev');
 
-// set values initialy
-let hours = 0;
-let mins = 0;
-let secs = 0;
 
-// set a variable to store interval function and set the value as null
-let timerID = null;
-
-// make a counter function
-function counter() {
-
-    // increase seconds part
-    secs++
+// universal function that will work for every item
+function global() {
+    // remove active class name
+    items.forEach(item => item.classList.remove('active'));
     
-    // set pattern for single numbers
-    let hour = hours < 10 ? '0' + hours : hours;
-    let min = mins < 10 ? '0' + mins : mins;
-    let sec = secs < 10 ? '0' + secs : secs;
-
-    // make a nested if-else condition like clock
-    // increase seconds and set limit
-    if (secs > 59) {
-        secs = 0;
-        mins++;
-
-        // increase minutes and  set limit
-        if (mins > 59) {
-            mins = 0;
-            hours++;
-
-            // set limit to hours
-            if (hour > 23) {
-                hours = 0;
-            }
-        }
-    }
-
-    // print the values inside display
-    display.textContent = `${hour}:${min}:${sec}`;
+    // add active class name to the first element of items
+    document.querySelector('.item').classList.add('active')
 }
 
-// link the function with start button
-startBtn.addEventListener('click' , () => {
-
-    // check the timerID value
-    if (timerID !== null) {
-        // if false then no changes in function
-        return
-    }
-
-    // set interval inside the timerID variable
-    timerID = setInterval(counter, 1000)
+// function for next button
+next.addEventListener('click' , () => {
+    // send the fist item to the last by appendChild
+    slider.appendChild(document.querySelector('.item'));
+    
+    // call global function
+    global()
 })
 
-// modify the function on pause button clicked
-pauseBtn.addEventListener('click' , () => {
+// previous button function
+prev.addEventListener('click' , () => {
+    // insert before function to get items elements back on prevous position
+    slider.insertBefore (
+        document.querySelectorAll('.item')[document.querySelectorAll('.item').length - 1],
+        document.querySelector('.item')
+    )
 
-    // clear interval
-    clearInterval(timerID); // cause the interval was stored in timerID
-
-    // set the timerID value  to null that will not affect the start button function
-    timerID = null;
+    // call global function
+    global()
 })
 
-// reset button  functionality
-resetBtn.addEventListener('click' , () => {
-
-    // clear interval & set the timerID value to null
-    clearInterval(timerID);
-    timerID = null;
-
-    // reset the values
-    hours = 0;
-    mins = 0;
-    secs = 0;
-
-    // reset the display content
-    display.textContent = '00:00:00';
-})
+// call global function
+global()
