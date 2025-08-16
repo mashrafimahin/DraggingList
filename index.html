@@ -1,65 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full Screen Image Slider</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="slider">
+  <div class="app-container">
+    <div class="weather-card">
+      <h1 class="app-title">🌤️ Weather App</h1>
 
-        <div class="item active" style="--bg: url(images/1.webp);">
-            <div class="content">
-                <h1>Mountain</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet, numquam reiciendis. Corporis eum itaque veritatis iste minima? Recusandae, impedit esse.</p>
-                <button>Read More</button>
-            </div>
-        </div>
-        <div class="item" style="--bg: url(images/2.webp);">
-            <div class="content">
-                <h1>Bridge</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet, numquam reiciendis. Corporis eum itaque veritatis iste minima? Recusandae, impedit esse.</p>
-                <button>Read More</button>
-            </div>
-        </div>
-        <div class="item" style="--bg: url(images/3.webp);">
-            <div class="content">
-                <h1>Terbine</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet, numquam reiciendis. Corporis eum itaque veritatis iste minima? Recusandae, impedit esse.</p>
-                <button>Read More</button>
-            </div>
-        </div>
-        <div class="item" style="--bg: url(images/4.webp);">
-            <div class="content">
-                <h1>Garden</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet, numquam reiciendis. Corporis eum itaque veritatis iste minima? Recusandae, impedit esse.</p>
-                <button>Read More</button>
-            </div>
-        </div>
-        <div class="item" style="--bg: url(images/5.webp);">
-            <div class="content">
-                <h1>Hills</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet, numquam reiciendis. Corporis eum itaque veritatis iste minima? Recusandae, impedit esse.</p>
-                <button>Read More</button>
-            </div>
-        </div>
-        <div class="item" style="--bg: url(images/6.webp);">
-            <div class="content">
-                <h1>Hot Ballon</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet, numquam reiciendis. Corporis eum itaque veritatis iste minima? Recusandae, impedit esse.</p>
-                <button>Read More</button>
-            </div>
-        </div>
+      <div class="search-box">
+        <input type="text" id="city" placeholder="Search city..." />
+        <button id="search">🔍</button>
+      </div>
 
+      <div class="weather-info">
+        <div class="icon-temp">
+          <img src="https://openweathermap.org/img/wn/01d.png" alt="weather icon" id="weather-icon">
+          <h2 id="temperature">--°C</h2>
+        </div>
+        <h3 id="city-name">City, Country</h3>
+        <div class="extra-info">
+          <p>💨 Wind: <span id="speed">-- m/s</span></p>
+          <p>💧 Humidity: <span id="hud">--%</span></p>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="buttons">
-        <button id="prev"><i class="fa-solid fa-arrow-left"></i></button>
-        <button id="next"><i class="fa-solid fa-arrow-right"></i></button>
-    </div>
-
-    <script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

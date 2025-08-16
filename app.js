@@ -1,38 +1,53 @@
-const items = document.querySelectorAll('.item');
-const slider = document.querySelector('.slider');
-const next = document.querySelector('#next');
-const prev = document.querySelector('#prev');
+const input = document.querySelector('#city');
+const btn = document.querySelector('#search');
+const temp = document.querySelector('#temperature');
+const city = document.querySelector('#city-name');
+const speed = document.querySelector('#speed');
+const hud = document.querySelector('#hud');
 
+btn.addEventListener('click' , async () => {
+    // input value collection
+    let inputValue = input.value.trim().toLowerCase();
 
-// universal function that will work for every item
-function global() {
-    // remove active class name
-    items.forEach(item => item.classList.remove('active'));
+    // validation
+    if (!inputValue) {
+        alert('plase input city name.');
+        return
+    }
     
-    // add active class name to the first element of items
-    document.querySelector('.item').classList.add('active')
-}
+    // create link or url
+    const search = `https://nominatim.openstreetmap.org/search?city=${inputValue}&format=json&limit=1`;
 
-// function for next button
-next.addEventListener('click' , () => {
-    // send the fist item to the last by appendChild
-    slider.appendChild(document.querySelector('.item'));
-    
-    // call global function
-    global()
+
+    // run functionality
+    try {
+        const data = await fetch(search);
+        const response = await data.json();
+        console.log(response)
+
+        // second url
+        const search2 = `https://api.open-meteo.com/v1/forecast?latitude=${response['0'].lat}&longitude=${response['0'].lon}&current=temperature_2m,wind_speed_10m,relative_humidity_2m`;
+
+        const data2 = await fetch(search2);
+        const response2 = await data2.json();
+
+        console.log(response2)
+
+        // temperature
+        temp.textContent = response2.current.temperature_2m + '°C';
+
+        // city
+        city.textContent = response['0'].display_name;
+
+        // speed
+        speed.textContent = response2.current.wind_speed_10m + 'km/h';
+
+        // humidity
+        hud.textContent = response2.current.relative_humidity_2m + '%';
+    }
+
+    // catch errors
+    catch (error) {
+        console.log('Sorry, Information not found!')
+    }
 })
-
-// previous button function
-prev.addEventListener('click' , () => {
-    // insert before function to get items elements back on prevous position
-    slider.insertBefore (
-        document.querySelectorAll('.item')[document.querySelectorAll('.item').length - 1],
-        document.querySelector('.item')
-    )
-
-    // call global function
-    global()
-})
-
-// call global function
-global()
