@@ -3,33 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weather App</title>
+  <title>GitHub User Finder</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="app-container">
-    <div class="weather-card">
-      <h1 class="app-title">🌤️ Weather App</h1>
+  <div class="container">
+    <h1 class="title">GitHub User Finder</h1>
 
-      <div class="search-box">
-        <input type="text" id="city" placeholder="Search city..." />
-        <button id="search">🔍</button>
+    <!-- Search -->
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Enter GitHub username...">
+      <button id="searchBtn">Search</button>
+    </div>
+
+    <!-- Profile Card -->
+    <div class="card hidden" id="profileCard">
+      <div class="profile-header">
+        <img src="" alt="Profile Picture" id="profileImg" draggable="false">
+        <h2 id="userName"></h2>
+        <p id="userBio"></p>
       </div>
 
-      <div class="weather-info">
-        <div class="icon-temp">
-          <img src="https://openweathermap.org/img/wn/01d.png" alt="weather icon" id="weather-icon">
-          <h2 id="temperature">--°C</h2>
+      <div class="stats">
+        <div>
+          <h3 id="location"></h3>
+          <p>Country</p>
         </div>
-        <h3 id="city-name">City, Country</h3>
-        <div class="extra-info">
-          <p>💨 Wind: <span id="speed">-- m/s</span></p>
-          <p>💧 Humidity: <span id="hud">--%</span></p>
+        <div>
+          <h3 id="type"></h3>
+          <p>Type</p>
+        </div>
+        <div>
+          <h3 id="repos"></h3>
+          <p>Repositories</p>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- JavaScript -->
   <script src="app.js"></script>
 </body>
 </html>

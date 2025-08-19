@@ -1,117 +1,181 @@
-/* Reset */
+/* Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #74ebd5, #9face6);
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-/* App Container */
-.app-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
   padding: 20px;
 }
 
-/* Card */
-.weather-card {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(20px);
-  border-radius: 20px;
-  padding: 30px 25px;
-  width: 350px;
+.container {
   text-align: center;
-  color: white;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-  animation: fadeIn 0.8s ease-in-out;
+  width: 100%;
+  max-width: 500px;
 }
 
-/* Title */
-.app-title {
-  font-size: 1.8rem;
+.title {
+  font-size: 2rem;
+  font-weight: 700;
   margin-bottom: 20px;
-  font-weight: 600;
 }
 
 /* Search Box */
 .search-box {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 25px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 8px;
 }
 
 .search-box input {
   flex: 1;
-  padding: 12px 15px;
+  padding: 12px;
   border: none;
-  border-radius: 12px;
-  font-size: 1rem;
+  border-radius: 8px;
   outline: none;
+  font-size: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.search-box input::placeholder {
+  color: #444;
 }
 
 .search-box button {
-  background: #ffffff33;
+  margin-left: 8px;
+  padding: 12px 20px;
   border: none;
-  padding: 12px;
-  border-radius: 12px;
+  border-radius: 8px;
+  background: #004b47;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
-  font-size: 1.2rem;
+  white-space: nowrap;
 }
 
 .search-box button:hover {
-  background: #ffffff55;
+  background: #062422;
 }
 
-/* Weather Info */
-.weather-info {
-  margin-top: 20px;
+.search-box button:active {scale: 0.9;}
+
+/* Profile Card */
+.card {
+  margin-top: 25px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
 }
 
-.icon-temp {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
+.card.hidden {
+  overflow: hidden;
+  height: 0;
+  padding: 0;
+  transition: 0.4s ease-in-out;
 }
 
-.icon-temp img {
-  width: 70px;
-  height: 70px;
+.card.hidden.active {
+  height: auto;
+  padding: 20px;
 }
 
-#temperature {
-  font-size: 2.5rem;
-  font-weight: bold;
+.profile-header img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 4px solid #062422;
+  margin-bottom: 12px;
+  object-fit: cover;
 }
 
-#city-name {
-  margin-top: 12px;
-  font-size: 1.2rem;
-  font-weight: 500;
-  margin-bottom: 30px;
+.profile-header h2 {
+  font-size: 1.4rem;
+  margin-bottom: 5px;
 }
 
-.extra-info {
+.profile-header p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Stats Section */
+.stats {
   display: flex;
   justify-content: space-around;
-  font-size: 0.95rem;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
-/* Animation */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+.stats div {
+  flex: 1 1 100px;
+}
+
+.stats div h3 {
+  font-size: 1.3rem;
+}
+
+.stats div p {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+
+/* Responsive Media Queries */
+@media (max-width: 600px) {
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .search-box {
+    flex-direction: column;
+    padding: 12px;
+  }
+
+  .search-box input {
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+  }
+
+  .search-box button {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .profile-header img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .profile-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .stats {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stats div {
+    width: 100%;
+    text-align: center;
+    flex: 1;
+  }
 }

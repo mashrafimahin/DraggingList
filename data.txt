@@ -1,0 +1,9 @@
+City name search:
+
+    https://nominatim.openstreetmap.org/search?city=${Value}&format=json&limit=1
+
+
+
+Weather search:
+
+    https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,wind_speed_10m,relative_humidity_2m

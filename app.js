@@ -1,53 +1,60 @@
-const input = document.querySelector('#city');
-const btn = document.querySelector('#search');
-const temp = document.querySelector('#temperature');
-const city = document.querySelector('#city-name');
-const speed = document.querySelector('#speed');
-const hud = document.querySelector('#hud');
+// taking data from HTML Doc.
+const data = document.getElementById('searchInput');
+const btn = document.querySelector('#searchBtn');
+const container = document.querySelector('.card hidden');
+const profile = document.querySelector('.profile-header img');
+const userName = document.querySelector('#userName');
+const userBio = document.querySelector('#userBio');
+const repos = document.querySelector('#repos');
+const loc = document.querySelector('#location');
+const type = document.querySelector('#type');
 
-btn.addEventListener('click' , async () => {
-    // input value collection
-    let inputValue = input.value.trim().toLowerCase();
-
-    // validation
-    if (!inputValue) {
-        alert('plase input city name.');
-        return
-    }
-    
-    // create link or url
-    const search = `https://nominatim.openstreetmap.org/search?city=${inputValue}&format=json&limit=1`;
-
-
-    // run functionality
+// asynchronus Function
+async function search() {
     try {
-        const data = await fetch(search);
-        const response = await data.json();
-        console.log(response)
+        // take query
+        let query = data.value.trim().toLowerCase();
 
-        // second url
-        const search2 = `https://api.open-meteo.com/v1/forecast?latitude=${response['0'].lat}&longitude=${response['0'].lon}&current=temperature_2m,wind_speed_10m,relative_humidity_2m`;
+        // Api Key
+        const apiKey = `https://api.github.com/search/users?q=${query}`;
+        const fetchData = await fetch(apiKey);
+        const responseData = await fetchData.json();
 
-        const data2 = await fetch(search2);
-        const response2 = await data2.json();
+        // checkpoint
 
-        console.log(response2)
+        // Fetching profile
+        const login = responseData.items['0'].login;
 
-        // temperature
-        temp.textContent = response2.current.temperature_2m + '°C';
+        const secondCall = `https://api.github.com/users/${login}`;
+        const fetchAgain = await fetch(secondCall);
+        const responseAgain = await fetchAgain.json();
 
-        // city
-        city.textContent = response['0'].display_name;
+        // unlock the main container
+        document.querySelector('.card').classList.add('active');
 
-        // speed
-        speed.textContent = response2.current.wind_speed_10m + 'km/h';
+        // print values
+        profile.src = responseAgain.avatar_url;
+        userName.textContent = responseAgain.name || 'Opps! Not found';
+        userBio.textContent = responseAgain.bio || 'Opps! Not found';
+        repos.textContent = responseAgain.public_repos || 'N/A';
+        loc.textContent = responseAgain.location || 'N/A';
+        type.textContent = responseAgain.type || 'N/A';
 
-        // humidity
-        hud.textContent = response2.current.relative_humidity_2m + '%';
+        // clean search field
+        data.value = ''
     }
-
-    // catch errors
     catch (error) {
-        console.log('Sorry, Information not found!')
+        console.log('Opps! User not found.');
+    }
+}
+
+// btn clicked
+btn.addEventListener('click' , search)
+
+// key pressed
+data.addEventListener('keydown', (e) => {
+    // check which key was pressed
+    if (e.key === 'Enter') {
+        search();
     }
 })
