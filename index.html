@@ -3,45 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GitHub User Finder</title>
+  <title>Calculator</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1 class="title">GitHub User Finder</h1>
-
-    <!-- Search -->
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Enter GitHub username...">
-      <button id="searchBtn">Search</button>
+    <!--Input-->
+    <div class="inputField">
+      <h1 id="displayCount">0</h1>
     </div>
+    <!--Buttons-->
+    <div class="buttons">
+      <!--Number Buttons-->
+      <div class="numbers">
+        
+        <!--Top Buttons-->
+        <button value="%">%</button>
+        <button value="clearAll">AC</button>
+        <button value="clear">DEL</button>
 
-    <!-- Profile Card -->
-    <div class="card hidden" id="profileCard">
-      <div class="profile-header">
-        <img src="" alt="Profile Picture" id="profileImg" draggable="false">
-        <h2 id="userName"></h2>
-        <p id="userBio"></p>
+        <!--Number Buttons-->
+        <button value="1">1</button>
+        <button value="2">2</button>
+        <button value="3">3</button>
+
+        <button value="4">4</button>
+        <button value="5">5</button>
+        <button value="6">6</button>
+
+        <button value="7">7</button>
+        <button value="8">8</button>
+        <button value="9">9</button>
+
+        <button value="0">0</button>
+        <button value="00">00</button>
+        <button value="dot">.</button>
       </div>
 
-      <div class="stats">
-        <div>
-          <h3 id="location"></h3>
-          <p>Country</p>
-        </div>
-        <div>
-          <h3 id="type"></h3>
-          <p>Type</p>
-        </div>
-        <div>
-          <h3 id="repos"></h3>
-          <p>Repositories</p>
-        </div>
+      <!--Operator Buttons-->
+      <div class="operator">
+        <button value="/">÷</button>
+        <button value="*">×</button>
+        <button value="-">-</button>
+        <button value="+">+</button>
+        <button value="=">=</button>
       </div>
     </div>
   </div>
-
-  <!-- JavaScript -->
+  
+  <!--JavaScript-->
   <script src="app.js"></script>
 </body>
 </html>
