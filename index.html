@@ -3,51 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculator</title>
+  <title>Currency Converter</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+  <!--Main Container-->
   <div class="container">
-    <!--Input-->
-    <div class="inputField">
-      <h1 id="displayCount">0</h1>
+    <!--Loader-->
+    <div class="loadBody">
+      <div class="loader"></div>
     </div>
-    <!--Buttons-->
+
+    <h1>Currency Converter</h1>
+    
+    <!--Search Field-->
+    <div class="search">
+      <label for="search">Enter amount:</label>
+      <input type="text" placeholder="Add amount" id="search">
+    </div>
+    
+    <!--Sub Container-->
+    <div class="selection">
+      
+      <!--from-->
+      <div class="from">
+        <img src="https://flagcdn.com/us.svg" id="from_icon" alt="currency_icon" draggable="false">
+        <select name="from_data" id="from_data"></select>
+      </div>
+      
+      <!--arrow-->
+      <i class="fa-solid fa-arrow-right-arrow-left"></i>
+      
+      <!--to-->
+      <div class="to">
+        <img src="https://flagcdn.com/bd.svg" id="to_icon" alt="currency_icon" draggable="false">
+        <select name="to_data" id="to_data"></select>
+      </div>
+    </div>
+    
+    <!--Result-->
+    <div class="output">
+      <p id="result"></p>
+    </div>
+    
+    <!--Button-->
     <div class="buttons">
-      <!--Number Buttons-->
-      <div class="numbers">
-        
-        <!--Top Buttons-->
-        <button value="%">%</button>
-        <button value="clearAll">AC</button>
-        <button value="clear">DEL</button>
-
-        <!--Number Buttons-->
-        <button value="1">1</button>
-        <button value="2">2</button>
-        <button value="3">3</button>
-
-        <button value="4">4</button>
-        <button value="5">5</button>
-        <button value="6">6</button>
-
-        <button value="7">7</button>
-        <button value="8">8</button>
-        <button value="9">9</button>
-
-        <button value="0">0</button>
-        <button value="00">00</button>
-        <button value="dot">.</button>
-      </div>
-
-      <!--Operator Buttons-->
-      <div class="operator">
-        <button value="/">÷</button>
-        <button value="*">×</button>
-        <button value="-">-</button>
-        <button value="+">+</button>
-        <button value="=">=</button>
-      </div>
+      <button id="btn">Convert</button>
     </div>
   </div>
   

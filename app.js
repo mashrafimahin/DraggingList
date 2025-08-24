@@ -1,35 +1,85 @@
-// takng varibales
-const btns = document.querySelectorAll('.buttons button');
-const display =  document.querySelector('#displayCount'); 
+const search = document.querySelector('#search');
+const from_value = document.querySelector('#from_data');
+const to_value = document.querySelector('#to_data');
+let from_icon = document.querySelector('#from_icon');
+let to_icon = document.querySelector('#to_icon');
+const result = document.querySelector('#result');
+const btn = document.querySelector('#btn');
+const loader = document.querySelector('.loadBody');
 
-// special characters & empty variable for result
-const opearators = ['%', '/', '*', '-', '+', '='];
-let result = '';
-
-// function
-function calc(value) {
-    
-    // if equal button pressed and value is not empty then inside the result variable change every string into code by using eval() function.
-    if (value === '=' && value !== '') {
-        result = eval(result.replace('%', '/100'));
-    } 
-    // check another condition when it says the button value is clearAll = All empty
-    else if (value === 'clearAll') result = '';
-    // check another condition when it says the button value is just clear = cut numbers from the last
-    else if (value === 'clear') {
-        result = result.toString().slice(0, -1)
-    }
-    // and finally if the button value is empty and it value includes the operator array then simply return false and close the declaration of output. Then simply say, result += button value
-    else {
-        if (value === '' && opearators.includes(value)) return;
-        result += value;
-    }
-
-    // print the value inside the final output attribute
-    display.textContent = result;
+// data source 
+const countries = {
+    "USD": { "country": "United States", "code": "US", "flag": "US" },
+    "EUR": { "country": "European Union", "code": "EU", "flag": "EU" },
+    "GBP": { "country": "United Kingdom", "code": "GB", "flag": "GB" },
+    "JPY": { "country": "Japan", "code": "JP", "flag": "JP" },
+    "AUD": { "country": "Australia", "code": "AU", "flag": "AU" },
+    "CAD": { "country": "Canada", "code": "CA", "flag": "CA" },
+    "CHF": { "country": "Switzerland", "code": "CH", "flag": "CH" },
+    "CNY": { "country": "China", "code": "CN", "flag": "CN" },
+    "INR": { "country": "India", "code": "IN", "flag": "IN" },
+    "NZD": { "country": "New Zealand", "code": "NZ", "flag": "NZ" },
+    "BDT": { "country": "Bangladesh", "code": "BD", "flag": "BD" }
 }
 
-// call the function on each button clicked by using event listener
-btns.forEach(btn => {
-    btn.addEventListener('click', (e) => calc(e.target.value))
+// loop 
+for (const key in countries) {
+    let keys = countries[key];
+    let code = keys.code;
+    let option = `<option value='${code}'>${code}</option>`;
+    from_value.innerHTML += option;
+    to_value.innerHTML += option;
+}
+
+// set default
+from_icon.src = `https://flagcdn.com/us.svg`;
+to_icon.src = `https://flagcdn.com/eu.svg`;
+from_value.value = "US";
+to_value.value = "EU";
+result.textContent = 'Convertion result will be shown here';
+
+// change event
+from_value.addEventListener('change' , () => {
+    let code = from_value.value.toLowerCase();
+    from_icon.src = `https://flagcdn.com/${code}.svg`;
 })
+to_value.addEventListener('change' , () => {
+    let code = to_value.value.toLowerCase();
+    to_icon.src = `https://flagcdn.com/${code}.svg`;
+})
+
+// converter function
+async function converter() {
+    
+    try {
+        // amount validation
+        let amount = search.value || 1;
+
+        // Identify the exact from and to value
+        let fromCurrency = Object.keys(countries).find(key => countries[key].code === from_value.value);
+        let toCurrency = Object.keys(countries).find(key => countries[key].code === to_value.value);
+
+        // fecthing data
+        let URL = `https://api.frankfurter.app/latest?amount=${amount}&from=${fromCurrency}&to=${toCurrency}`;
+        let fetching = await fetch(URL);
+        let responseData = await fetching.json();
+        console.log(responseData)
+
+        // result pattern
+        let convertedData = `${responseData.amount} ${fromCurrency} = ${responseData.rates[toCurrency]} ${toCurrency}`;
+
+        // print 
+        result.textContent = convertedData;
+    }
+    catch (error) {
+        loader.classList.add('activate');
+        setTimeout(() => {
+            loader.classList.remove('activate');
+            result.textContent = 'Opps! Server not responded.';
+        }, 3000)
+    }
+
+}
+
+// btn call the main function
+btn.addEventListener('click' , converter);
