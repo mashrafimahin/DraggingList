@@ -4,3 +4,21 @@ Currency URL:
 
 Country Flag URL:
     https://flagcdn.com/test.svg
+
+
+Country Object: 
+    const countries = {
+    "USD": { "country": "United States", "code": "US", "flag": "US" },
+    "EUR": { "country": "European Union", "code": "EU", "flag": "EU" },
+    "GBP": { "country": "United Kingdom", "code": "GB", "flag": "GB" },
+    "JPY": { "country": "Japan", "code": "JP", "flag": "JP" },
+    "AUD": { "country": "Australia", "code": "AU", "flag": "AU" },
+    "CAD": { "country": "Canada", "code": "CA", "flag": "CA" },
+    "CHF": { "country": "Switzerland", "code": "CH", "flag": "CH" },
+    "CNY": { "country": "China", "code": "CN", "flag": "CN" },
+    "INR": { "country": "India", "code": "IN", "flag": "IN" },
+    "NZD": { "country": "New Zealand", "code": "NZ", "flag": "NZ" },
+    "BDT": { "country": "Bangladesh", "code": "BD", "flag": "BD" }
+}
+
+
