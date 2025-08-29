@@ -1,19 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jokes Generator</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Copy to Clipboard</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <main class="app">
+  <section class="card" id="app">
+    <div class="header">
+      <div>
+        <h1 class="title">Copy to Clipboard</h1>
+        <p class="subtitle">Type or paste text below. Then hit <b>Copy</b></p>
+      </div>
+    </div>
 
-  <div class="container">
-    <h1>😂</h1>
-    <p id="jokeText">Click the button to get a joke!</p>
-    <p id="title"></p>
-    <button id="jokeBtn">Get Joke</button>
-  </div>
+
+    <div class="field">
+      <textarea id="clipboard-input" placeholder="Write something worth sharing…"></textarea>
+    </div>
+
+
+    <div class="footer">
+      <div class="status" id="status">
+        <span class="status-text">Text Copied…</span>
+      </div>
+
+
+      <div class="row">
+        <button class="btn btn-ghost" id="selectBtn">Reset</button>
+        <button class="btn btn-primary" id="copyBtn">Copy</button>
+      </div>
+    </div>
+  </section>
+  </main>
+
 
   <script src="app.js"></script>
 </body>

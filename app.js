@@ -1,21 +1,48 @@
-// taking variables
-const content = document.querySelector('#jokeText');
-const title = document.querySelector('#title');
-const btn = document.querySelector('#jokeBtn');
+const textField = document.querySelector('#clipboard-input');
+const stats = document.querySelector('#status');
+const btns = document.querySelectorAll('.btn');
 
-// asynchronus function
-async function jokes() {
-    try {
-        const url_fetch = await fetch('https://official-joke-api.appspot.com/random_joke');
-        const data = await url_fetch.json();
-        content.textContent = data.setup;
-        title.textContent = data.punchline;
+// function for copy full text
+function copy() {
+
+    // get the inputed value
+    const input = textField.value.trim();
+
+    // check if there's no value inside textarea
+    if (!input) {
+        alert('Plase input something')
+        return
     }
-    catch (error) {
-        content.textContent = 'Opps! Something went wrong.';
-        title.textContent = '';
-    }
+
+    // copying animation
+    stats.style.display = 'block';
+
+    // set timeout function to add some animation
+    setTimeout(() => {
+        stats.style.display = 'none';
+    }, 1000)
+    
+    // return value with copy
+    return navigator.clipboard.writeText(input)
 }
 
-// link the function to the button
-btn.addEventListener('click' , jokes)
+// set function for each button
+btns.forEach(btn => {
+
+    // set event listener for each button
+    btn.addEventListener('click', (e) => {
+
+        // set the target value inside a variable
+        const targetedItem = e.target;
+
+        // check if the button is copy button then simply run the copy function
+        if (targetedItem.className === 'btn btn-primary') {
+            copy()
+        }
+
+        // if the button is reset button then simply remove all value from text field
+        else if (targetedItem.className === 'btn btn-ghost') {
+            textField.value = ''
+        }
+    })
+})
