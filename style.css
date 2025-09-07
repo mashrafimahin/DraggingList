@@ -3,80 +3,113 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
-    background-color: #FAD691;
+    background-color: #333;
 }
-
-main {
-    height: 100dvh;
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+    min-height: 100dvh;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-section, 
-.header > div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    row-gap: 10px;
-}
-
-section{ row-gap: 20px; }
-
-.header > div h1 {
-    font-size: 40px;
+    position: relative;
+    overflow: hidden;
     font-family: Arial, Helvetica, sans-serif;
 }
-
-.field textarea {
-    height: 100px;
-    width: 300px;
-    padding: 10px 16px;
-    outline: none;
-    resize: none;
-    color: #555;
+.bmi-container ,
+.data {
+    background: #444;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px 0 rgba(255,255,255,0.1),
+                inset 0 0 10px 0 rgba(255,255,255,0.08);
+    width: 100%;
+    max-width: 400px;
 }
 
-.footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    row-gap: 14px;
+.bmi-container h2,
+.data h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #fff;
 }
 
-.row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+.input-group {
+  margin-bottom: 1rem;
 }
 
-.row button {
-    margin-top: 5px;
-    padding: 8px 16px;
-    cursor: pointer;
-    border: 1px solid transparent;
-    width: 100px;
-    border-radius: 4px;
-    background-color: #B9375D;
-    color: #fff;
-    transition: 0.08s ease-in-out;
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #eee;
 }
 
-.row button:nth-last-child(1) {
-    background-color: #17313E;
+.input-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
 }
 
-.row button:active {
-    transform: translateY(2px);
-    border: 1px solid #222;
-    background-color: #777;
-    scale: 0.95;
+.calculate-btn {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.status { display: none; }
+.calculate-btn:hover {
+  background-color: #45a049;
+}
+
+.result {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.2rem;
+  min-height: 1.5em;
+}
+
+.data {
+  height: 80dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.content > div {
+  padding: 20px 16px;
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.content > div h2 {
+  font-size: 20px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.content > div > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.content > div > div p {color: #fff;}
