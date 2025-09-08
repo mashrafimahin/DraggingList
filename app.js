@@ -1,125 +1,82 @@
-// ------------------------------
-// 📌 Get DOM elements
-// ------------------------------
-const names = document.querySelector('#name');
-const height = document.querySelector('#height');
-const weight = document.querySelector('#weight');
-const btn = document.querySelector('#calculate');
-const output = document.querySelector('#result');
-let content = document.querySelector('.data');
+const user_name = document.querySelector('#name');
+const user_email = document.querySelector('#email');
+const user_mobile = document.querySelector('#phone');
+const user_message = document.querySelector('#message');
+const user_checkbox = document.querySelectorAll('.checkbox input');
+const sendBtn = document.querySelector('#send');
 
-// ------------------------------
-// 📌 Load existing names from LocalStorage
-// ------------------------------
-let user_storage = JSON.parse(localStorage.getItem('Names')) || [];
+// get local storage data record
+let user = JSON.parse(localStorage.getItem('Name')) || [];
 
-
-// ------------------------------
-// 📌 Save data to LocalStorage
-// ------------------------------
-function storage(user, object) {
-    // Get previously saved names
-    let getNames = JSON.parse(localStorage.getItem('Names'));
-
-    // Prevent duplicate user name
-    if (getNames !== null && getNames.includes(user)) {
-        alert('Already added into storage.');
-        return;
-    }
-
-    // Add new user into array
-    user_storage.push(user);
-
-    // Save updated names list
-    localStorage.setItem('Names', JSON.stringify(user_storage));
-
-    // Save this user's BMI record
-    localStorage.setItem(user, JSON.stringify(object));
-}
-
-
-// ------------------------------
-// 📌 Create a data pattern object
-// ------------------------------
-function pattern(height, weight, bmi) {
+// storage pattern
+function Pattern(username, email, mobile, message, choice) {
     return {
-        Height: height,
-        Weight: weight,
-        BMI: bmi
+        user: username,
+        email: email,
+        mobile: mobile,
+        message: message,
+        interests: choice
     }
 }
 
-
-// ------------------------------
-// 📌 Fetch and display stored data
-// ------------------------------
-function fetching() {
-    let per_name = JSON.parse(localStorage.getItem('Names'));
-
-    // Stop if nothing saved yet
-    if (per_name === null) return;
-
-    // Clear previous HTML before re-rendering
-    content.innerHTML = `<h2>Previous Data</h2>`;
-
-    // Loop through each saved user
-    per_name.forEach(item => {
-        let current = JSON.parse(localStorage.getItem(item));
-
-        // Create an HTML block for each entry
-        let HTML_pattern = 
-        `<div class="content">
-            <div class="info">
-                <h2>Name: ${item}</h2>
-                <div class="list">
-                    <p>Height: ${current.Height}</p>
-                    <p>Weight: ${current.Weight}</p>
-                    <p>BMI: ${current.BMI}</p>
-                </div>
-            </div>
-        </div>`;
-
-        // Insert into .data container
-        content.insertAdjacentHTML('beforeend', HTML_pattern);
-    });
-}
-
-
-// ------------------------------
-// 📌 Handle button click
-// ------------------------------
-btn.addEventListener('click' , () => {
-    // Get input values
-    let user = names.value.trim();
-    let heightValue = height.value;
-    let weightValue = weight.value;
-
-    // Validation
-    if (user === '' || heightValue === '' || weightValue === '') {
-        alert('Please input all fields');
+// store data to local 
+function Store(username, object) {
+    // checkpoint
+    let currentCheck = localStorage.getItem('Name');
+    let userLower = username.toLowerCase();
+    
+    if (
+        currentCheck !== null &&
+        currentCheck.includes(userLower)
+    ) {
+        alert('Already added into storage using this name. Please add another name to save data.');
         return;
     }
 
-    // Convert height to meters & calculate BMI
-    let heightInNum = Number(heightValue) / 100;
-    let weightInNum = Number(weightValue);
-    let sum = weightInNum / (heightInNum * heightInNum);
+    // push record to usesr variable
+    user.push(userLower);
 
-    // Show BMI result
-    output.innerHTML = `${sum.toFixed(2)} kg/m<sup>2</sup>`;
+    // store data 
+    localStorage.setItem('Name', JSON.stringify(user));
+    localStorage.setItem(userLower, JSON.stringify(object));
+}
 
-    // Prepare object
-    let pattern_data = pattern(heightInNum, weightInNum, (Math.round(sum * 1000) / 1000));
+// Main function 
+function Data() {
+    // get values
+    const username = user_name.value.trim();
+    const email = user_email.value.trim();
+    const mobile = user_mobile.value.trim();
+    const message = user_message.value.trim();
 
-    // Save data
-    storage(user, pattern_data);
+    // validation
+    if (username === '') {
+        alert('Please add details to save in storage.');
+        return;
+    }
+    
+    // multiple choices
+    let multipleChoice = [];
+    user_checkbox.forEach(item => {
+        if (item.checked) {
+            multipleChoice.push(item.value);
+        }
+    });
 
-    // 🔄 Reload page to refresh data display
-    location.reload();
-});
 
+    // store data for pattern
+    let object = Pattern(username, email, mobile, message, multipleChoice);
 
-// ------------------------------
-// 📌 Initial fetch when page loads
-// ------------------------------
-fetching();
+    // main storage
+    Store(username, object)
+
+    console.log(multipleChoice)
+}
+
+// run function on click
+sendBtn.addEventListener('click', (e) => {
+    // prevent page from reload
+    e.preventDefault();
+    // call the main function
+    Data()
+})
