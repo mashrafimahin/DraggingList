@@ -1,65 +1,48 @@
-// get the values inside variable
-const fileInput = document.querySelector('#fileInput')
-const preview = document.querySelector('.preview')
-const placeholder = document.querySelector('#placeholder')
+// get data from html
+const select = document.querySelector('#select');
+const input = document.querySelector('#input');
+const btn = document.querySelector('#btn');
 
-// main change function
-fileInput.addEventListener('change', () => {
-    // store file lists inside variable
-    const files = fileInput.files;
+// auto check function with attribute changes
+function autoFill() {
     
-    // validation for placeholder
-    if (files.length > 0) {
-        placeholder.style.display = 'none';
-    }
-
-    // loop to see through each file
-    for (const file of files) {
-        
-        // creating image url
-        let imageLink = URL.createObjectURL(file);
-        
-        // creating elements with attributes
-        let image = document.createElement('div');
-        image.setAttribute('class', 'image');
-        let img = document.createElement('img');
-        img.src = imageLink;
-        img.setAttribute('draggable', false);
-        let icon = document.createElement('i');
-        icon.setAttribute('class', 'fa-solid fa-times');
-        let size = document.createElement('p');
-        
-        // set image size value as null initially 
-        let sizeValue = null;
-        
-        // calculate the size of image
-        if ((file.size / 1024) <= 1024) {
-            sizeValue = Math.floor((file.size / 1024)) + ' KB'
-        } 
-        else if ((file.size / 1024) > 1024) {
-            sizeValue = Math.ceil((file.size / 1024) / 1024) + ' MB'
-        } 
-
-        // add size inside the targeted variable
-        size.textContent = sizeValue;
-        
-        // append all the elements inside HTML
-        image.append(img, icon, size);
-        preview.append(image);
-        
-        // memory free up method
-        img.onload = () => {
-            URL.revokeObjectURL(imageLink);
+    // run function on selection changes
+    select.addEventListener('change', () => {
+        if (select.value === 'hsx') {
+            input.setAttribute('placeholder', '000000')
         }
-        
-        // cross icon close function
-        icon.addEventListener('click', (e) => {
-            e.currentTarget.parentElement.remove()
+        else {
+            input.setAttribute('placeholder', 'red, green, blue')
+        }
+    })
+}
 
-            // if there's no image div then put back the placeholder
-            if (preview.children.length === 1) {
-                placeholder.style.display = 'block';
-            }
-        })
+// color change on button click
+btn.addEventListener('click', () => {
+    // get values
+    let selectValue = select.value;
+    let inputData = input.value.trim();
+    
+    // checkpoint
+    if (inputData === '') {
+        alert('You must have to add color code.');
+        return;
     }
+
+    // default code
+    let code = '';
+
+    // set color code by following condition
+    if (selectValue === 'hsx') {
+        code = `#${inputData}`
+    }
+    else if (selectValue === 'rgb') {
+        code = `rgb(${inputData})`
+    }
+
+    // change the body background with inputed values
+    document.body.style.background = code;
 })
+
+// Initialize the auto check function
+autoFill();

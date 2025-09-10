@@ -3,21 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>File Upload Preview</title>
+  <title>Color Generator</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-  <div class="upload-container">
-    <h2>Upload Your File</h2>
-    
-    <div class="content">
-      <div class="preview">
-        <p id="placeholder">No file choosen</p>
+  <div class="container">
+      <div class="selection">
+        <!--Selection-->
+        <select id="select">
+          <option value="hsx" selected>HSX</option>
+          <option value="rgb">RGB</option>
+        </select>
+        <!--Input-->
+        <input type="text" id="input" placeholder="000000">
       </div>
-      <label for="fileInput">Upload File</label>
-      <input type="file" id="fileInput" hidden>
-    </div>
+      <div class="generate-button">
+        <button id="btn">Generate</button>
+      </div>
   </div>
   <!--JavaScript-->
   <script src="app.js"></script>

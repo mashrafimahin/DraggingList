@@ -1,95 +1,58 @@
-:root {
-  --btn: #007bff;
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-  background: antiquewhite;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  background-color: bisque;
 }
 
-.upload-container {
-  width: 800px;
-  padding: 25px;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-  text-align: center;
-}
-
-.upload-container h2 {
-  margin-bottom: 20px;
-  font-size: 1.5rem;
-  color: #333;
-}
-
-.content {
-  border: 1px dashed #eee;
-  padding: 2%;
-  border-radius: 5px;
-  padding-bottom: 4%;
-}
-
-.preview {
+.container {
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 30px;
-}
-
-.preview .image {
-  display: flex;
   flex-direction: column;
+  row-gap: 20px;
+}
+
+.selection {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 5px;
-  border: 1px dashed gray;
-  border-radius: 10px;
-  position: relative;
+  border: 1px dashed #999;
+  background-color: #fff;
 }
 
-.preview .image img {
-  height: 150px;
-  width: auto;
-  max-width: 100%;
-  border-radius: 5px;
-  object-fit: cover;
-  cursor: default;
-}
-
-.preview .image i {
-  position: absolute;
-  top: 0;
-  right: 0;
-  font-size: 16px;
-  padding: 2px 0;
-  border-radius: 100px;
-  background-color: #f00;
-  color: #fff;
-  cursor: pointer;
-}
-
-.preview p {
-  font-size: 16px;
-  color: #555;
-}
-
-.content label {
-  padding: 12px 20px;
-  background-color: var(--btn);
-  border-radius: 4px;
+.selection input, 
+.selection select {
+  padding: 14px 10px;
+  border: none;
+  outline: none;
+  color: #333;
+  background: transparent;
   font-size: 14px;
-  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.selection input {
+  border-left: 1px dashed #999;
+  width: 300px;
+}
+
+.generate-button button {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border: none;
+  border-radius: 5px;
+  background-color: #f1f1f1;
   cursor: pointer;
+  box-shadow: 0 5px 0 0 rgb(0,0,0,0.1);
+  transition: 0.08s ease-in-out;
+}
+
+.generate-button button:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 0 rgb(0,0,0,0.1);
 }
