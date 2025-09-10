@@ -1,94 +1,25 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Contact / Signup Form</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Upload Preview</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-
-    <main class="card" aria-labelledby="form-title">
-        <h1 id="form-title">Get in touch</h1>
-        <p class="lead">Fill out the form below and let us know your interests.</p>
-
-        <form>
-        <!-- name / email -->
-        <div class="row">
-            <div>
-                <label for="name">Full name <span class="required" aria-hidden="true">*</span></label>
-                <input id="name" name="name" type="text" placeholder="Jane Doe" required />
-            </div>
-
-            <div>
-                <label for="email">Email <span class="required" aria-hidden="true">*</span></label>
-                <input id="email" name="email" type="email" placeholder="jane@example.com" required />
-            </div>
-        </div>
-
-        <!-- phone -->
-        <div>
-            <label for="phone">Phone number</label>
-            <input id="phone" name="phone" type="tel" placeholder="+0123456789" />
-            <div class="muted">Optional. Use country code for best results.</div>
-        </div>
-
-        <!-- message -->
-        <div>
-            <label for="message">Message / Short bio</label>
-            <textarea id="message" name="message" placeholder="Tell us a little about yourself or your project..."></textarea>
-        </div>
-
-        <!-- checkboxes -->
-        <fieldset aria-labelledby="interests-label">
-          <label id="interests-label">I'm interested in</label>
-            <div class="checkbox-grid">
-                <class class="checkbox">
-                    <input type="checkbox" name="interests" value="web-development" />
-                    <span>Web Dev.</span>
-                </class>
-
-                <class class="checkbox">
-                    <input type="checkbox" name="interests" value="design" />
-                    <span>Design</span>
-                </class>
-
-                <class class="checkbox">
-                    <input type="checkbox" name="interests" value="coding" />
-                    <span>Coding</span>
-                </class>
-
-                <class class="checkbox">
-                    <input type="checkbox" name="interests" value="backend" />
-                    <span>Backend</span>
-                </class>
-            </div>
-        </fieldset>
-
-        <!-- buttons -->
-        <div class="actions">
-            <button type="reset">Reset</button>
-            <button type="submit" id="send">Send</button>
-        </div>
-
-        </form>
-    </main>
-
-    <!--search-->
-    <div class="search">
-        <div class="mainSearch">
-            <div class="searchBox">
-                <label for="searchNow">Search data by name:</label>
-                <input type="text" id="searchNow" placeholder="John Doe">
-            </div>
-            <button id="searchBtn">search</button>
-        </div>
-        <!--display data-->
-        <div class="display"></div>
+  <div class="upload-container">
+    <h2>Upload Your File</h2>
+    
+    <div class="content">
+      <div class="preview">
+        <p id="placeholder">No file choosen</p>
+      </div>
+      <label for="fileInput">Upload File</label>
+      <input type="file" id="fileInput" hidden>
     </div>
-
-    <!--JavaScript-->
-    <script src="app.js"></script>
-    <script src="fetchData.js"></script>
+  </div>
+  <!--JavaScript-->
+  <script src="app.js"></script>
 </body>
 </html>
