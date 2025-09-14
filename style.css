@@ -5,54 +5,93 @@
 }
 
 body {
-  background-color: bisque;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f6f9fc, #eef2f7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
 }
 
 .container {
-  min-height: 100dvh;
+  width: 380px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  padding: 24px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #2d3748;
+  text-align: center;
+}
+
+.draggable-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.draggable-list li {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  row-gap: 20px;
+  justify-content: space-between;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  cursor: grab;
+  transition: all 0.25s ease;
 }
 
-.selection {
+.draggable-list li:active { cursor: grabbing; }
+
+.draggable-list li:hover {
+  background: #f3f4f6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.profile {
   display: flex;
   align-items: center;
-  border: 1px dashed #999;
-  background-color: #fff;
+  gap: 12px;
 }
 
-.selection input, 
-.selection select {
-  padding: 14px 10px;
-  border: none;
-  outline: none;
-  color: #333;
-  background: transparent;
-  font-size: 14px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.profile img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
 }
 
-.selection input {
-  border-left: 1px dashed #999;
-  width: 300px;
-}
-
-.generate-button button {
-  padding: 12px 20px;
+.name {
   font-size: 16px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  border: none;
-  border-radius: 5px;
-  background-color: #f1f1f1;
-  cursor: pointer;
-  box-shadow: 0 5px 0 0 rgb(0,0,0,0.1);
-  transition: 0.08s ease-in-out;
+  font-weight: 500;
+  color: #1f2937;
 }
 
-.generate-button button:active {
-  transform: translateY(4px);
-  box-shadow: 0 2px 0 0 rgb(0,0,0,0.1);
+.drag-icon {
+  font-size: 20px;
+  color: #9ca3af;
+  cursor: grab;
+  transition: color 0.2s, 0.1s ease;
+}
+
+.drag-icon:active { cursor: grabbing; }
+
+.draggable-list li:hover .drag-icon {
+  color: #4b5563;
+}
+
+/* dragging */
+.dragging {
+  opacity: 0;
+  transform: scale(1.02);
 }

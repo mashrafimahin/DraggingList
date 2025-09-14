@@ -1,48 +1,38 @@
-// get data from html
-const select = document.querySelector('#select');
-const input = document.querySelector('#input');
-const btn = document.querySelector('#btn');
+// taking values inside variable
+const container = document.querySelector('.draggable-list');
+const lists = document.querySelectorAll('li');
 
-// auto check function with attribute changes
-function autoFill() {
-    
-    // run function on selection changes
-    select.addEventListener('change', () => {
-        if (select.value === 'hsx') {
-            input.setAttribute('placeholder', '000000')
-        }
-        else {
-            input.setAttribute('placeholder', 'red, green, blue')
-        }
+// Dragging function
+function Dragging() {
+
+    lists.forEach(list => {
+        // add class name dragging on drag start
+        list.addEventListener('dragstart', () => {
+            list.classList.add('dragging');
+        })
+        // remove class name dragging on drag end
+        list.addEventListener('dragend', () => {
+            list.classList.remove('dragging');
+        })
     })
 }
 
-// color change on button click
-btn.addEventListener('click', () => {
-    // get values
-    let selectValue = select.value;
-    let inputData = input.value.trim();
-    
-    // checkpoint
-    if (inputData === '') {
-        alert('You must have to add color code.');
-        return;
-    }
+// main function when drag over the main container
+container.addEventListener('dragover', (e) => {
+    // target the list with class name dragging
+    const dragItem = container.querySelector('.dragging');
 
-    // default code
-    let code = '';
+    // select all the lists without dragging class name and set the Nodelist inside array for apply (find, map, reduce etc) methods 
+    const sortableList = [...document.querySelectorAll('li:not(.dragging)')];
 
-    // set color code by following condition
-    if (selectValue === 'hsx') {
-        code = `#${inputData}`
-    }
-    else if (selectValue === 'rgb') {
-        code = `rgb(${inputData})`
-    }
+    // return a condition with clientY and list top + height using find method
+    let nextSibling = sortableList.find(item => {
+        return e.clientY <= item.offsetTop + item.offsetHeight / 2;
+    })
 
-    // change the body background with inputed values
-    document.body.style.background = code;
-})
+    // add the dragging list on targeted position using insertBefore
+    container.insertBefore(dragItem, nextSibling);
+});
 
-// Initialize the auto check function
-autoFill();
+// Initialize function
+Dragging()

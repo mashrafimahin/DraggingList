@@ -3,25 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Color Generator</title>
+  <title>Modern Drag & Drop List</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
   <div class="container">
-      <div class="selection">
-        <!--Selection-->
-        <select id="select">
-          <option value="hsx" selected>HSX</option>
-          <option value="rgb">RGB</option>
-        </select>
-        <!--Input-->
-        <input type="text" id="input" placeholder="000000">
-      </div>
-      <div class="generate-button">
-        <button id="btn">Generate</button>
-      </div>
+    <h2 class="title">Team Members</h2>
+
+    <ul class="draggable-list">
+        <li draggable="true">
+        <div class="profile">
+          <img src="https://i.pravatar.cc/60?img=1" draggable="false" alt="Person 1">
+          <span class="name">John Doe</span>
+        </div>
+        <i class="fas fa-grip-lines drag-icon"></i>
+        </li>
+        <li draggable="true">
+        <div class="profile">
+          <img src="https://i.pravatar.cc/60?img=2" draggable="false" alt="Person 2">
+          <span class="name">Emma Smith</span>
+        </div>
+        <i class="fas fa-grip-lines drag-icon"></i>
+        </li>
+        <li draggable="true">
+        <div class="profile">
+          <img src="https://i.pravatar.cc/60?img=3" draggable="false" alt="Person 3">
+          <span class="name">Michael Lee</span>
+        </div>
+        <i class="fas fa-grip-lines drag-icon"></i>
+        </li>
+        <li draggable="true">
+        <div class="profile">
+          <img src="https://i.pravatar.cc/60?img=4" draggable="false" alt="Person 4">
+          <span class="name">Sophia Brown</span>
+        </div>
+        <i class="fas fa-grip-lines drag-icon"></i>
+        </li>
+    </ul>
+
   </div>
   <!--JavaScript-->
-  <script src="app.js"></script>
+  <script src="app.js" ></script>
 </body>
 </html>
